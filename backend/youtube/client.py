@@ -1,24 +1,27 @@
 """
-Busca o video_id do YouTube para uma faixa e CACHEIA no SQLite.
+Busca o video_id do YouTube para uma faixa e CACHEIA no Supabase.
 
-Isso não é opcional: search.list custa 100 unidades de cota contra um
+Isso nao e opcional: search.list custa 100 unidades de cota contra um
 limite diario de 10.000 no tier gratuito - sem cache, ~100 buscas sem
-repetir faixa já estoura a cota do dia inteiro.
+repetir faixa ja estoura a cota do dia inteiro.
+
+O cache mora no Supabase (nao no SQLite local) porque o filesystem do
+Render free e efemero - qualquer coisa escrita em runtime some no proximo
+restart/redeploy. Sem cache persistente, cada deploy zera o progresso e
+volta a queimar cota do zero.
 
 Sem YOUTUBE_API_KEY configurada, cai em modo mock (video_id fixo de
 placeholder) para o resto do sistema continuar funcionavel em dev/demo.
 """
-import json
 import logging
 import os
-import sqlite3
-from pathlib import Path
 
 import requests
 
+from storage.supabase_client import select_one, upsert
+
 log = logging.getLogger("vibe.youtube")
 
-DB_PATH = Path(__file__).parent.parent / "data" / "tracks.db"
 API_KEY = os.environ.get("YOUTUBE_API_KEY")
 SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 
@@ -40,23 +43,15 @@ MOCK_VIDEO_ID = "dQw4w9WgXcQ"
 
 def get_video_candidates(track_id: int, title: str, artist: str) -> list[str]:
     """Retorna a lista de video_ids candidatos pra faixa (primário + fallbacks).
-    Cacheados como JSON na coluna youtube_alt_ids - uma linha de busca cobre
+    Cacheados no Supabase (tabela video_cache) - uma linha de busca cobre
     N tentativas de reprodução, sem gastar cota de novo a cada bloqueio."""
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-
-    cached = conn.execute(
-        "SELECT youtube_video_id, youtube_alt_ids FROM tracks WHERE id = ?", (track_id,)
-    ).fetchone()
-    if cached and cached["youtube_video_id"]:
-        conn.close()
-        alt_ids = json.loads(cached["youtube_alt_ids"]) if cached["youtube_alt_ids"] else []
-        return [cached["youtube_video_id"], *alt_ids]
+    cached = select_one("video_cache", {"track_id": track_id})
+    if cached and cached.get("youtube_video_id"):
+        return [cached["youtube_video_id"], *(cached.get("youtube_alt_ids") or [])]
 
     if not API_KEY:
         # modo mock: NÃO grava no cache, senão quando a chave for
         # configurada depois o app acha que já resolveu e nunca busca
-        conn.close()
         return [MOCK_VIDEO_ID]
 
     candidates = _search(title, artist)
@@ -68,12 +63,11 @@ def get_video_candidates(track_id: int, title: str, artist: str) -> list[str]:
         # tenta de novo em vez de ficar presa no mock pra sempre.
         return [MOCK_VIDEO_ID]
     primary, alt_ids = candidates[0], candidates[1:]
-    conn.execute(
-        "UPDATE tracks SET youtube_video_id = ?, youtube_alt_ids = ? WHERE id = ?",
-        (primary, json.dumps(alt_ids), track_id),
+    upsert(
+        "video_cache",
+        {"track_id": track_id, "youtube_video_id": primary, "youtube_alt_ids": alt_ids},
+        on_conflict="track_id",
     )
-    conn.commit()
-    conn.close()
     return candidates
 
 

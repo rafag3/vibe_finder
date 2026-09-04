@@ -1,4 +1,3 @@
-import json
 import os
 import sqlite3
 from pathlib import Path
@@ -32,6 +31,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix  # noqa: E402
 from matching.engine import find_tracks_by_genre  # noqa: E402
 from youtube.client import API_KEY, get_video_candidates  # noqa: E402
 from cover_art.client import get_metadata  # noqa: E402
+from storage.supabase_client import count as supabase_count, enabled as supabase_enabled, insert as supabase_insert  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -65,23 +65,23 @@ limiter = Limiter(
 @app.route("/health")
 def health():
     """Diagnóstico, não só liveness. Reporta o que realmente costuma
-    quebrar em produção: chave ausente e cache vazio depois de um restart
-    com filesystem efêmero."""
+    quebrar em produção: chave ausente e Supabase não configurado (cache
+    cairia pra vazio a cada restart, já que o filesystem local é efêmero)."""
     try:
         conn = sqlite3.connect(DB_PATH)
-        total, cached = conn.execute(
-            "SELECT COUNT(*), COUNT(youtube_video_id) FROM tracks"
-        ).fetchone()
+        total = conn.execute("SELECT COUNT(*) FROM tracks").fetchone()[0]
         conn.close()
     except sqlite3.Error as e:
         log.error("health check falhou ao ler o banco: %s", e)
         return jsonify({"status": "degraded", "error": "banco inacessível"}), 503
 
+    cached = supabase_count("video_cache")
     return jsonify({
         "status": "ok",
         "tracks": total,
-        "video_cache": f"{cached}/{total}",
+        "video_cache": f"{cached}/{total}" if cached is not None else "indisponível",
         "youtube_key": bool(API_KEY),  # booleano, nunca a chave em si
+        "supabase": supabase_enabled(),
     })
 
 
@@ -103,10 +103,6 @@ def generate():
     # tem limite diário.
     tracks = find_tracks_by_genre(mood_text, genres_limit=8, per_genre=6)
     for t in tracks:
-        raw_alt_ids = t.pop("youtube_alt_ids", None)
-        t["youtube_alt_ids"] = json.loads(raw_alt_ids) if raw_alt_ids else []
-        t.pop("artwork_url", None)  # coluna interna do banco
-        t.pop("preview_url", None)
         meta = get_metadata(t["id"], t["title"], t["artist"])
         t["cover_url"] = meta["cover_url"]
         t["preview_url"] = meta["preview_url"]
@@ -137,13 +133,7 @@ def track_video(track_id):
 
 
 def _save_history(mood_text: str, track_ids: list[int]) -> None:
-    conn = sqlite3.connect(DB_PATH)
-    conn.execute(
-        "INSERT INTO generated_playlists (mood_text, track_ids) VALUES (?, ?)",
-        (mood_text, json.dumps(track_ids)),
-    )
-    conn.commit()
-    conn.close()
+    supabase_insert("generated_playlists", {"mood_text": mood_text, "track_ids": track_ids})
 
 
 if __name__ == "__main__":

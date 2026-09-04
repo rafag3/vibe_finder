@@ -1,18 +1,19 @@
 """
-Pre-popula o cache de video do YouTube e de capa/preview no tracks.db.
+Pre-popula o cache de video do YouTube e de capa/preview no Supabase
+(video_cache / cover_cache) - o cache persiste la, nao no SQLite local, entao
+sobrevive a restart/redeploy do Render mesmo sem commitar nada.
 
-Motivo: em hospedagem gratuita o filesystem e EFEMERO - tudo que o app
-escrever em runtime some no proximo restart/spin-down. Se o cache nascer
-vazio a cada restart, cada clique de play refaz um search.list (100 unidades
-de cota, contra 10.000/dia) e a cota do dia evapora.
-
-A solucao e rodar isto LOCALMENTE, com a chave de API na .env, e commitar
-o tracks.db ja preenchido. Em producao o app passa a so LER o cache.
+Ainda vale rodar isto antes de mostrar o app pra alguem: cada faixa sem
+cache custa ~100 unidades de cota (search.list) contra um limite de
+10.000/dia, entao popular o cache com antecedencia evita que os primeiros
+~100 plays reais do dia queimem a cota inteira.
 
 Uso:
     cd backend
-    python -m data.warm_cache --limit 95          # respeita a cota do dia
-    python -m data.warm_cache --limit 95 --skip 95  # no dia seguinte
+    python -m data.warm_cache --limit 95            # respeita a cota do dia
+    python -m data.warm_cache --limit 95 --skip 95   # no dia seguinte (o que ja
+                                                      # estiver cacheado e pulado
+                                                      # de graca, sem gastar cota)
 
 Cota: cada faixa sem cache custa ~100 unidades (search.list). Com 10.000/dia
 cabem ~100 faixas por dia. As capas (iTunes) nao tem cota.
@@ -51,20 +52,23 @@ def main() -> int:
     if not args.covers_only and not os.environ.get("YOUTUBE_API_KEY"):
         print("ERRO: YOUTUBE_API_KEY nao configurada - sem ela o client cai em modo mock.")
         return 1
+    if not os.environ.get("SUPABASE_URL") or not os.environ.get("SUPABASE_KEY"):
+        print("ERRO: SUPABASE_URL/SUPABASE_KEY nao configuradas - sem elas nada e cacheado.")
+        return 1
 
     from cover_art.client import get_metadata
+    from storage.supabase_client import count as supabase_count
     from youtube.client import get_video_candidates
 
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     rows = conn.execute(
-        "SELECT id, title, artist FROM tracks "
-        "WHERE youtube_video_id IS NULL ORDER BY id LIMIT ? OFFSET ?",
+        "SELECT id, title, artist FROM tracks ORDER BY id LIMIT ? OFFSET ?",
         (args.limit, args.skip),
     ).fetchall()
     conn.close()
 
-    print(f"{len(rows)} faixa(s) sem cache de video nesta janela.")
+    print(f"Processando {len(rows)} faixa(s) - as ja cacheadas no Supabase sao puladas de graca.")
     for i, row in enumerate(rows, 1):
         label = f"{row['artist']} - {row['title']}"
         try:
@@ -78,12 +82,8 @@ def main() -> int:
             print(f"[{i}/{len(rows)}] {label} -> FALHOU: {exc}")
         time.sleep(0.2)  # educado com as duas APIs
 
-    conn = sqlite3.connect(DB_PATH)
-    total, cached = conn.execute(
-        "SELECT COUNT(*), COUNT(youtube_video_id) FROM tracks"
-    ).fetchone()
-    conn.close()
-    print(f"\nCache de video: {cached}/{total} faixas. Commite o tracks.db atualizado.")
+    total_cached = supabase_count("video_cache")
+    print(f"\nCache de video no Supabase: {total_cached} faixa(s) no total.")
     return 0
 
 

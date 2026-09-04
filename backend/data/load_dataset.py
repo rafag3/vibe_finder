@@ -24,38 +24,18 @@ CREATE TABLE IF NOT EXISTS tracks (
     valence REAL NOT NULL,       -- 0 (triste/negativo) a 1 (feliz/positivo)
     energy REAL NOT NULL,        -- 0 (calmo) a 1 (intenso)
     tempo REAL,                  -- BPM
-    danceability REAL,
-    youtube_video_id TEXT,       -- preenchido sob demanda (cache), fica NULL até a 1a busca
-    youtube_alt_ids TEXT,        -- JSON list de video_ids alternativos (fallback se o primário bloquear embed)
-    artwork_url TEXT,            -- capa via iTunes Search API (grátis, sem cota) - NULL=nunca buscou, ""=buscou e não achou, URL=achou
-    preview_url TEXT             -- preview de 30s via iTunes (mesma busca) - fallback de áudio quando o YouTube falha
-);
-
-CREATE TABLE IF NOT EXISTS generated_playlists (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    mood_text TEXT NOT NULL,
-    track_ids TEXT NOT NULL,     -- JSON list de ids
-    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    danceability REAL
 );
 """
-
-
-def _migrate(conn: sqlite3.Connection) -> None:
-    """ALTER TABLE idempotente: cobre bancos criados antes de uma coluna
-    existir, sem precisar apagar dados já cacheados."""
-    cols = {row[1] for row in conn.execute("PRAGMA table_info(tracks)")}
-    if "youtube_alt_ids" not in cols:
-        conn.execute("ALTER TABLE tracks ADD COLUMN youtube_alt_ids TEXT")
-    if "artwork_url" not in cols:
-        conn.execute("ALTER TABLE tracks ADD COLUMN artwork_url TEXT")
-    if "preview_url" not in cols:
-        conn.execute("ALTER TABLE tracks ADD COLUMN preview_url TEXT")
+# Cache de video (YouTube), capa/preview (iTunes) e historico de playlists
+# geradas moram no Supabase (ver storage/supabase_client.py), nao aqui - este
+# banco e so o catalogo estatico de faixas, comitado no git, nunca escrito
+# em runtime. Ver DEPLOY.md pro motivo (filesystem efemero em produção).
 
 
 def load():
     conn = sqlite3.connect(DB_PATH)
     conn.executescript(SCHEMA)
-    _migrate(conn)
 
     with open(CSV_PATH, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)

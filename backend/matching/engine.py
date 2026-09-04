@@ -8,6 +8,7 @@ e o resultado é totalmente determinístico (mesma entrada = mesma saída,
 importante pra depurar e demonstrar).
 """
 import math
+import random
 import sqlite3
 import unicodedata
 from pathlib import Path
@@ -147,6 +148,20 @@ def find_tracks(mood_text: str, limit: int = 10) -> list[dict]:
     return [dict(r) for r in ranked]
 
 
+GENRE_POOL_MULTIPLIER = 3
+# Dentro de cada gênero, em vez de sempre pegar as `per_genre` faixas mais
+# próximas do alvo, sorteia entre um pool das `per_genre * GENRE_POOL_MULTIPLIER`
+# mais próximas. Sem isso, moods diferentes que caem perto da mesma região do
+# espaço (ex: "feliz" e "empolgado") sempre devolvem exatamente o mesmo top-N
+# de um gênero grande - com só 127 faixas no dataset, isso é a causa mais
+# visível de "sempre aparecem as mesmas músicas".
+#
+# O sorteio é seedado pelo texto do mood (normalizado), não por um RNG global:
+# a MESMA entrada sempre devolve a MESMA saída (ver docstring do módulo -
+# determinismo importa pra depurar/demonstrar), mas entradas diferentes
+# sorteiam subconjuntos diferentes do mesmo pool de candidatas próximas.
+
+
 def find_tracks_by_genre(
     mood_text: str, genres_limit: int = 6, per_genre: int = 4
 ) -> list[dict]:
@@ -158,10 +173,11 @@ def find_tracks_by_genre(
 
     Estratégia: ranqueia gêneros pela distância do seu melhor candidato
     (quão bem aquele estilo consegue representar o mood pedido), pega os
-    `genres_limit` gêneros mais relevantes, e dentro de cada um pega os
-    `per_genre` mais próximos.
+    `genres_limit` gêneros mais relevantes, e dentro de cada um sorteia
+    `per_genre` faixas entre as mais próximas (ver GENRE_POOL_MULTIPLIER).
     """
     target_valence, target_energy = _extract_target(mood_text)
+    rng = random.Random(_normalize(mood_text))
 
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
@@ -185,5 +201,7 @@ def find_tracks_by_genre(
 
     result = []
     for genre, genre_rows in ranked_genres[:genres_limit]:
-        result.extend(dict(r) for r in genre_rows[:per_genre])
+        pool = genre_rows[: per_genre * GENRE_POOL_MULTIPLIER]
+        chosen = pool if len(pool) <= per_genre else rng.sample(pool, per_genre)
+        result.extend(dict(r) for r in chosen)
     return result

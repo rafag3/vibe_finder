@@ -181,3 +181,14 @@ def test_by_genre_e_deterministico():
     a = [t["id"] for t in find_tracks_by_genre("saudade", 8, 6)]
     b = [t["id"] for t in find_tracks_by_genre("saudade", 8, 6)]
     assert a == b
+
+
+def test_by_genre_varia_entre_moods_parecidos():
+    # "feliz" e "alegr" mapeiam pro mesmo vetor (valence, energy) - mesmo
+    # assim, o pool sample (seedado pelo texto do mood) deve devolver
+    # conjuntos diferentes num genero com mais candidatas que per_genre.
+    # E o motivo do pool sample existir: sem ele, dois moods que caem na
+    # mesma regiao do espaco sempre mostrariam exatamente as mesmas faixas.
+    a = [t["id"] for t in find_tracks_by_genre("feliz", 8, 6)]
+    b = [t["id"] for t in find_tracks_by_genre("alegr", 8, 6)]
+    assert a != b

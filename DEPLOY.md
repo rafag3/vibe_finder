@@ -47,6 +47,9 @@ Confira antes do push que `git status` **não** lista `backend/.env`, `backend/v
 3. Environment → adicione:
    - `YOUTUBE_API_KEY` = a chave nova
    - `FRONTEND_ORIGIN` = `https://<seu-projeto>.vercel.app` (preencha depois do passo 3)
+   - `SUPABASE_URL` e `SUPABASE_KEY` = do projeto Supabase (ver seção "Cache
+     persistente" abaixo) — sem eles o cache de vídeo/capa não sobrevive a
+     um restart, e cada restart volta a queimar cota do YouTube do zero.
 4. Deploy. Valide: `curl https://<seu-servico>.onrender.com/health` → `{"status":"ok"}`
 
 **1 worker é intencional.** O SQLite não aguenta escrita concorrente de múltiplos
@@ -69,28 +72,34 @@ exige **redeploy** do frontend, não basta salvar.
 
 ---
 
-## 4. Preencher o cache antes de mostrar pra alguém
+## 4. Cache persistente (Supabase) + preencher antes de mostrar pra alguém
 
-Esse é o passo que faz diferença de verdade e o motivo do
-`backend/data/warm_cache.py` existir.
+O free tier do Render tem **filesystem efêmero**: qualquer coisa escrita em runtime
+(inclusive um SQLite local) some a cada restart, redeploy ou spin-down. Por isso o
+cache de vídeo do YouTube, o cache de capa/preview do iTunes e o histórico de
+playlists moram no **Supabase** (Postgres gerenciado, free tier), não no
+`tracks.db` — o `tracks.db` local ficou só como catálogo estático de faixas
+(comitado no git, nunca escrito em runtime).
 
-O free tier do Render tem **filesystem efêmero**: o `tracks.db` volta ao estado do commit
-a cada restart, redeploy ou spin-down. Como o cache de vídeo mora nesse arquivo, sem
-pré-preencher ele nasce vazio toda vez — e cada play numa faixa não cacheada dispara um
-`search.list`, que custa **100 das 10.000 unidades diárias** de cota. São ~100 plays por
-dia antes de tudo cair no vídeo mock.
+1. Crie um projeto em [supabase.com](https://supabase.com) (free tier).
+2. Rode as migrations que criam as 3 tabelas (`video_cache`, `cover_cache`,
+   `generated_playlists`) e as RLS policies — ver `backend/storage/supabase_client.py`
+   pro schema esperado por cada tabela.
+3. Pegue a URL do projeto e a chave `anon` (Project Settings → API) e configure
+   `SUPABASE_URL`/`SUPABASE_KEY` no Render (passo 2) e no `.env` local.
 
-Rode localmente, com a chave na `.env`, e **commite o `.db` resultante**:
+Sem cota do YouTube envolvida, isso já resolve o problema pra sempre — o cache
+persiste entre deploys, sem precisar commitar nada. Ainda vale rodar o warm-up
+antes de divulgar o link, porque cada faixa sem cache custa **100 das 10.000
+unidades diárias** de cota (`search.list`):
 
 ```bash
 cd backend
-python -m data.warm_cache --limit 95              # dia 1
-python -m data.warm_cache --limit 95 --skip 95    # dia 2 (são 127 faixas)
-git add data/tracks.db && git commit -m "cache de video pre-populado" && git push
+python -m data.warm_cache --limit 95              # respeita a cota do dia
+python -m data.warm_cache --limit 95 --skip 95    # dia seguinte, se sobrar faixa
 ```
 
-Com o cache completo no commit, a produção só **lê** o banco — o filesystem efêmero deixa
-de importar na prática, e a cota diária fica intacta para faixas novas.
+Não precisa commitar nada depois — o cache já está no Supabase, não no `.db` local.
 
 ---
 
@@ -99,8 +108,7 @@ de importar na prática, e a cota diária fica intacta para faixas novas.
 | Limitação | Efeito | Mitigação |
 |---|---|---|
 | Render dorme após 15 min ocioso | Primeira geração após ociosidade leva ~1 min | Aceitar, ou $7/mês para always-on |
-| Filesystem efêmero | Cache e histórico somem no restart | `warm_cache.py` (passo 4) |
-| Cota YouTube 10k/dia | ~100 buscas novas/dia | Cache pré-populado |
+| Cota YouTube 10k/dia | ~100 buscas novas/dia | Cache no Supabase + `warm_cache.py` (passo 4) |
 | CORS fixo em `FRONTEND_ORIGIN` | Preview deploys da Vercel (URLs variáveis) são bloqueados | Adicionar a URL do preview ao `FRONTEND_ORIGIN`, ou testar só em produção |
 
 Manter o serviço acordado com um ping externo consome as 750 h/mês inteiras (744 h em um
@@ -110,13 +118,14 @@ mês cheio) em um único serviço, e o Render não trata isso como uso suportado
 
 ## Por que não colocar tudo na Vercel
 
-O backend escreve no SQLite em três pontos: cache de vídeo (`youtube/client.py`), cache de
-capa/preview (`cover_art/client.py`) e histórico (`generated_playlists` em `app.py`). O
-runtime serverless da Vercel tem **filesystem somente leitura** fora de `/tmp`, e `/tmp`
-não sobrevive entre invocações. As escritas falhariam ou seriam descartadas silenciosamente
-a cada request, o que na prática significa **zero cache e queima total da cota**.
+O backend tem três pontos de escrita: cache de vídeo (`youtube/client.py`), cache de
+capa/preview (`cover_art/client.py`) e histórico (`generated_playlists` em `app.py`) — hoje
+todos no Supabase, não mais no SQLite local (ver seção "Cache persistente" acima). O runtime
+serverless da Vercel tem **filesystem somente leitura** fora de `/tmp`, e `/tmp` não sobrevive
+entre invocações — isso inviabilizaria escritas locais, mas não afeta escritas num Postgres
+gerenciado externo como o Supabase.
 
-Quando a arquitetura atual incomodar, o próximo passo correto não é mudar de host: é mover
-as três escritas para um Postgres gerenciado (Supabase free, por exemplo). São 127 linhas e
-3 tabelas — a migração é pequena. Aí o cache passa a persistir de verdade, o histórico para
-de sumir, e o backend fica livre para rodar em qualquer plataforma, serverless inclusive.
+Na prática isso significa que o backend já não depende de disco gravável pra funcionar
+corretamente — poderia rodar em qualquer plataforma, serverless inclusive. A escolha por
+Render continua sendo sobre simplicidade (processo Flask de longa duração, sem reescrever
+pra functions) e não mais uma exigência técnica do cache.

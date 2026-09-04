@@ -126,3 +126,177 @@ Asa Branca,Luiz Gonzaga,forro,0.40,0.35,88,0.35
 Numanice,Alcione,samba,0.72,0.48,90,0.62
 Cai Cai Balão,Roupa Nova,rock-nacional,0.65,0.40,85,0.40
 Whisky a Go Go,Roupa Nova,rock-nacional,0.70,0.48,92,0.55
+Canon in D,Johann Pachelbel,classical,0.55,0.20,60,0.15
+Nocturne Op.9 No.2,Frédéric Chopin,classical,0.45,0.15,66,0.10
+Gymnopédie No.1,Erik Satie,classical,0.40,0.10,66,0.10
+Air on the G String,Johann Sebastian Bach,classical,0.50,0.15,60,0.10
+Adagio for Strings,Samuel Barber,classical,0.15,0.20,60,0.10
+Für Elise,Ludwig van Beethoven,classical,0.55,0.25,72,0.20
+The Four Seasons - Spring,Antonio Vivaldi,classical,0.80,0.55,120,0.35
+Ave Maria,Franz Schubert,classical,0.35,0.15,66,0.10
+Moonlight Sonata,Ludwig van Beethoven,classical,0.20,0.15,60,0.10
+Take Five,Dave Brubeck,jazz,0.60,0.55,88,0.55
+Fly Me to the Moon,Frank Sinatra,jazz,0.70,0.40,120,0.50
+So What,Miles Davis,jazz,0.50,0.35,88,0.35
+What a Wonderful World,Louis Armstrong,jazz,0.75,0.25,80,0.30
+My Funny Valentine,Chet Baker,jazz,0.40,0.20,70,0.25
+A Night in Tunisia,Dizzy Gillespie,jazz,0.55,0.70,150,0.55
+Autumn Leaves,Bill Evans,jazz,0.35,0.25,90,0.30
+Blue in Green,Miles Davis,jazz,0.25,0.15,60,0.15
+Cantaloupe Island,Herbie Hancock,jazz,0.65,0.55,110,0.60
+I Want You Back,Jackson 5,soul,0.85,0.75,98,0.75
+Superstition,Stevie Wonder,soul,0.75,0.80,100,0.80
+What's Going On,Marvin Gaye,soul,0.45,0.35,92,0.45
+Respect,Aretha Franklin,soul,0.80,0.70,115,0.70
+Lean on Me,Bill Withers,soul,0.65,0.40,140,0.40
+Sittin' on the Dock of the Bay,Otis Redding,soul,0.35,0.25,84,0.30
+I Say a Little Prayer,Aretha Franklin,soul,0.70,0.55,140,0.55
+A Change Is Gonna Come,Sam Cooke,soul,0.30,0.30,80,0.25
+Levels,Avicii,edm,0.75,0.90,126,0.75
+Wake Me Up,Avicii,edm,0.70,0.80,124,0.65
+One More Time,Daft Punk,edm,0.80,0.85,123,0.80
+Animals,Martin Garrix,edm,0.55,0.92,128,0.75
+Clarity,Zedd,edm,0.60,0.80,128,0.65
+Sandstorm,Darude,edm,0.50,0.90,136,0.70
+Strobe,Deadmau5,edm,0.45,0.55,128,0.45
+Faded,Alan Walker,edm,0.35,0.60,90,0.50
+This Is What It Feels Like,Armin van Buuren,edm,0.60,0.78,128,0.65
+Don't You Worry Child,Swedish House Mafia,edm,0.65,0.82,129,0.70
+Turn Down for What,DJ Snake,edm,0.55,0.95,100,0.85
+Jolene,Dolly Parton,country,0.35,0.35,120,0.35
+Take Me Home Country Roads,John Denver,country,0.75,0.45,90,0.40
+Ring of Fire,Johnny Cash,country,0.50,0.55,150,0.50
+Wagon Wheel,Darius Rucker,country,0.75,0.60,140,0.55
+Friends in Low Places,Garth Brooks,country,0.65,0.55,130,0.50
+Before He Cheats,Carrie Underwood,country,0.35,0.65,130,0.50
+Chicken Fried,Zac Brown Band,country,0.85,0.55,100,0.50
+The Dance,Garth Brooks,country,0.20,0.20,70,0.20
+Need You Now,Lady Antebellum,country,0.30,0.35,110,0.35
+The Sound of Silence,Simon and Garfunkel,folk,0.15,0.15,105,0.20
+Blowin' in the Wind,Bob Dylan,folk,0.35,0.25,105,0.30
+Fast Car,Tracy Chapman,folk,0.30,0.30,105,0.35
+The Boxer,Simon and Garfunkel,folk,0.30,0.25,95,0.25
+Landslide,Fleetwood Mac,folk,0.35,0.20,100,0.25
+Skinny Love,Bon Iver,folk,0.15,0.20,90,0.20
+Big Yellow Taxi,Joni Mitchell,folk,0.70,0.50,130,0.55
+The Weight,The Band,folk,0.55,0.40,105,0.40
+I Will Wait,Mumford and Sons,folk,0.65,0.65,133,0.50
+Circle of Life,Elton John,soundtrack,0.65,0.55,120,0.35
+My Heart Will Go On,Celine Dion,soundtrack,0.30,0.30,100,0.25
+Married Life,Michael Giacchino,soundtrack,0.35,0.25,90,0.15
+He's a Pirate,Hans Zimmer,soundtrack,0.55,0.85,140,0.35
+Time,Hans Zimmer,soundtrack,0.30,0.40,60,0.15
+A Whole New World,Aladdin Cast,soundtrack,0.75,0.45,100,0.35
+Concerning Hobbits,Howard Shore,soundtrack,0.70,0.30,110,0.25
+Athiê,Natiruts,reggae-nacional,0.75,0.55,95,0.65
+Refugo do Mundo,O Rappa,reggae-nacional,0.55,0.60,100,0.55
+Pescador de Ilusões,O Rappa,reggae-nacional,0.45,0.50,95,0.50
+Andar Com Fé,Gilberto Gil,reggae-nacional,0.70,0.55,105,0.60
+Todo Camburão Tem um Pouco de Navio Negreiro,O Rappa,reggae-nacional,0.35,0.60,100,0.50
+Selvagem,Natiruts,reggae-nacional,0.72,0.50,92,0.60
+Vamos Fugir,Skank,reggae-nacional,0.75,0.65,110,0.65
+An Ending (Ascent),Brian Eno,ambient,0.35,0.10,60,0.10
+Music for Airports 1/1,Brian Eno,ambient,0.30,0.08,55,0.10
+Svefn-g-englar,Sigur Rós,ambient,0.30,0.15,66,0.15
+Porcelain,Moby,ambient,0.30,0.18,90,0.20
+Strobe (Intro),Deadmau5,ambient,0.35,0.25,100,0.20
+Nuvole Bianche,Ludovico Einaudi,ambient,0.40,0.15,70,0.15
+Experience,Ludovico Einaudi,ambient,0.45,0.30,90,0.25
+Divenire,Ludovico Einaudi,ambient,0.42,0.25,80,0.20
+Take On Me,a-ha,synthpop,0.80,0.80,169,0.70
+Tainted Love,Soft Cell,synthpop,0.55,0.75,145,0.70
+Enjoy the Silence,Depeche Mode,synthpop,0.35,0.55,120,0.55
+Just Can't Get Enough,Depeche Mode,synthpop,0.70,0.75,120,0.70
+Cars,Gary Numan,synthpop,0.45,0.65,140,0.55
+West End Girls,Pet Shop Boys,synthpop,0.55,0.60,120,0.60
+Kids,MGMT,synthpop,0.60,0.75,120,0.65
+Midnight City,M83,synthpop,0.65,0.78,105,0.65
+Creep,Radiohead,alternative,0.15,0.40,92,0.30
+Smells Like Teen Spirit,Nirvana,alternative,0.40,0.90,117,0.50
+Zombie,The Cranberries,alternative,0.20,0.65,90,0.35
+Black Hole Sun,Soundgarden,alternative,0.20,0.55,105,0.30
+1979,The Smashing Pumpkins,alternative,0.55,0.55,120,0.55
+Basket Case,Green Day,alternative,0.35,0.85,170,0.45
+Wonderwall,Oasis,alternative,0.55,0.50,87,0.45
+The Man Who Sold the World,Nirvana,alternative,0.25,0.45,100,0.30
+Pumped Up Kicks,Foster the People,indie,0.55,0.55,128,0.60
+Somebody Told Me,The Killers,indie,0.55,0.80,143,0.60
+Two Weeks,FKA Twigs,indie,0.30,0.35,90,0.35
+Electric Feel,MGMT,indie,0.60,0.60,115,0.60
+Little Talks,Of Monsters and Men,indie,0.65,0.65,140,0.50
+Home,Edward Sharpe and the Magnetic Zeros,indie,0.75,0.55,145,0.50
+Skinny Love,Birdy,indie,0.20,0.20,90,0.20
+Youth,Daughter,indie,0.20,0.25,85,0.20
+Aquarela do Brasil,Ary Barroso,samba,0.70,0.60,120,0.65
+O Show Tem Que Continuar,Beth Carvalho,samba,0.70,0.55,100,0.60
+As Rosas Não Falam,Cartola,samba,0.55,0.35,90,0.45
+Portela na Avenida,Vários,samba,0.80,0.75,130,0.80
+Coisinha do Pai,Zeca Pagodinho,samba,0.75,0.55,100,0.65
+Camisa Amarela,Ary Barroso,samba,0.72,0.55,105,0.65
+Alvorada,Cartola,samba,0.60,0.40,90,0.45
+Tristeza,Haroldo Lobo,samba,0.25,0.30,80,0.35
+Águas de Março,Elis Regina e Tom Jobim,samba,0.65,0.45,100,0.50
+HUMBLE.,Kendrick Lamar,hip-hop,0.50,0.80,150,0.75
+Sicko Mode,Travis Scott,hip-hop,0.55,0.78,155,0.70
+God's Plan,Drake,hip-hop,0.55,0.55,77,0.75
+In Da Club,50 Cent,hip-hop,0.60,0.75,90,0.80
+Alright,Kendrick Lamar,hip-hop,0.60,0.65,110,0.60
+N.Y. State of Mind,Nas,hip-hop,0.35,0.50,94,0.55
+Sicário,Racionais MC's,hip-hop,0.25,0.55,95,0.45
+Negro Drama,Racionais MC's,hip-hop,0.30,0.50,90,0.45
+Corcovado,Tom Jobim,bossa-nova,0.55,0.20,90,0.30
+Desafinado,João Gilberto,bossa-nova,0.60,0.30,100,0.40
+Samba de Uma Nota Só,Tom Jobim,bossa-nova,0.65,0.35,120,0.45
+Insensatez,Tom Jobim,bossa-nova,0.35,0.20,80,0.25
+Evidências,Chitãozinho e Xororó,romantica,0.55,0.30,75,0.30
+Por Você Eu Digo Sim,Bruno e Marrone,romantica,0.60,0.35,80,0.35
+Como Uma Onda,Lulu Santos,romantica,0.70,0.50,110,0.55
+Só Você,Roupa Nova,romantica,0.55,0.35,85,0.35
+É Preciso Saber Viver,Roberto Carlos e Erasmo Carlos,romantica,0.65,0.40,90,0.40
+Preciso Dizer Que Te Amo,Erasmo Carlos e Roberto Carlos,romantica,0.60,0.35,85,0.35
+De Você Eu Não Esqueço Mais,Alexandre Pires,romantica,0.55,0.35,80,0.35
+Isso Aqui O Que É?,Michael Sullivan,romantica,0.65,0.40,90,0.40
+Rap das Armas,Cidinho e Doca,funk,0.55,0.80,130,0.85
+Ela Só Pensa em Beijar,MC João,funk,0.65,0.85,140,0.90
+Bum Bum Tam Tam,MC Fioti,funk,0.75,0.85,130,0.90
+Que Tiro Foi Esse,Anitta,funk,0.70,0.85,130,0.90
+Sua Cara,Major Lazer e Anitta,funk,0.75,0.85,105,0.85
+Aquecimento das Danadas,MC Kevinho,funk,0.65,0.85,135,0.90
+Vai Malandra,Anitta,funk,0.60,0.85,130,0.90
+Qui Nem Jiló,Luiz Gonzaga,forro,0.70,0.60,120,0.65
+Pagode Russo,Luiz Gonzaga,forro,0.70,0.65,125,0.70
+Sweet Child O' Mine,Guns N' Roses,rock,0.60,0.80,125,0.55
+Livin' on a Prayer,Bon Jovi,rock,0.65,0.85,123,0.55
+Back in Black,AC/DC,rock,0.60,0.90,94,0.55
+Smoke on the Water,Deep Purple,rock,0.45,0.80,112,0.45
+Bola de Meia Bola de Gude,Almir Guineto,pagode,0.65,0.50,95,0.60
+Foi Deus,Ferrugem,pagode,0.60,0.45,90,0.55
+Shape of You,Ed Sheeran,pop,0.75,0.70,96,0.80
+Can't Stop the Feeling,Justin Timberlake,pop,0.90,0.80,113,0.85
+Watermelon Sugar,Harry Styles,pop,0.75,0.65,95,0.60
+As It Was,Harry Styles,pop,0.55,0.55,120,0.65
+Flowers,Miley Cyrus,pop,0.65,0.60,96,0.65
+É Uma Partida de Futebol,Skank,rock-nacional,0.65,0.60,120,0.55
+Todo Amor Que Houver Nessa Vida,Skank,rock-nacional,0.55,0.45,90,0.45
+1º de Julho,Skank,rock-nacional,0.60,0.60,110,0.55
+Ando Meio Desligado,Gilberto Gil,mpb,0.65,0.55,110,0.55
+O Que Será (À Flor da Pele),Chico Buarque,mpb,0.45,0.30,85,0.35
+Tempo Rei,Gilberto Gil,mpb,0.65,0.50,100,0.50
+Higher Ground,Stevie Wonder,soul,0.75,0.85,120,0.75
+Preciso Me Encontrar,Cartola,samba,0.3,0.3,80,0.3
+Not Afraid,Eminem,hip-hop,0.4,0.75,86,0.55
+So Danco Samba,Tom Jobim,bossa-nova,0.7,0.4,115,0.55
+Meditacao,Tom Jobim,bossa-nova,0.45,0.2,85,0.3
+O Barquinho,Roberto Menescal,bossa-nova,0.65,0.3,100,0.4
+Como E Grande o Meu Amor Por Voce,Roberto Carlos,romantica,0.6,0.35,85,0.35
+Baiao,Luiz Gonzaga,forro,0.65,0.55,115,0.55
+A Vida do Viajante,Luiz Gonzaga,forro,0.55,0.5,105,0.5
+Olha Pro Ceu,Luiz Gonzaga,forro,0.7,0.55,110,0.55
+Stairway to Heaven,Led Zeppelin,rock,0.35,0.45,82,0.25
+Enter Sandman,Metallica,rock,0.35,0.85,123,0.45
+Faroeste Caboclo,Legiao Urbana,rock-nacional,0.25,0.55,100,0.35
+Metal Contra as Nuvens,Legiao Urbana,rock-nacional,0.35,0.65,130,0.4
+Calice,Chico Buarque,mpb,0.2,0.3,80,0.25
+Sampa,Caetano Veloso,mpb,0.45,0.4,95,0.4
+Bad Guy,Billie Eilish,pop,0.35,0.55,135,0.7
+Peaches,Justin Bieber,pop,0.7,0.55,90,0.65

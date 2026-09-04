@@ -4,7 +4,7 @@ Gerador de playlist por mood/vibe. Backend Flask (API pura) + frontend React/Vit
 
 ```
 playlist-mood-project/
-├── backend/    Flask API (matching engine, cache YouTube, SQLite)
+├── backend/    Flask API (matching engine, SQLite p/ catálogo, Supabase p/ cache)
 └── frontend/   React + Vite + Framer Motion
 ```
 
@@ -34,7 +34,13 @@ Cria um `.env` dentro de `backend/` com (veja `.env.example`):
 ```
 YOUTUBE_API_KEY=sua_chave_aqui
 FRONTEND_ORIGIN=http://localhost:5173
+SUPABASE_URL=https://seu-projeto.supabase.co
+SUPABASE_KEY=sua_chave_anon
 ```
+`SUPABASE_URL`/`SUPABASE_KEY` são opcionais em dev: sem elas o app funciona
+normalmente, só não persiste o cache de vídeo/capa entre reinícios (ver
+`DEPLOY.md` pra por que isso importa em produção).
+
 Roda o dataset (se ainda não tiver `data/tracks.db` populado):
 ```
 python data/load_dataset.py

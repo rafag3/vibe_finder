@@ -1,0 +1,128 @@
+title,artist,genre,valence,energy,tempo,danceability
+Weightless,Marconi Union,ambient,0.35,0.15,60,0.20
+Clair de Lune,Claude Debussy,classical,0.40,0.10,66,0.15
+Sunday Morning,Maroon 5,pop,0.75,0.35,88,0.55
+Here Comes the Sun,The Beatles,rock,0.85,0.55,129,0.60
+Good as Hell,Lizzo,pop,0.90,0.75,96,0.80
+Levitating,Dua Lipa,pop,0.88,0.80,103,0.85
+Blinding Lights,The Weeknd,synthpop,0.70,0.85,171,0.75
+Eye of the Tiger,Survivor,rock,0.65,0.90,109,0.60
+Stronger,Kanye West,hip-hop,0.55,0.92,104,0.75
+Till I Collapse,Eminem,hip-hop,0.40,0.88,171,0.55
+Someone Like You,Adele,pop,0.15,0.25,67,0.30
+Fix You,Coldplay,rock,0.20,0.30,138,0.25
+Hurt,Johnny Cash,country,0.10,0.20,79,0.20
+Mad World,Gary Jules,alternative,0.08,0.15,89,0.25
+Breathe Me,Sia,pop,0.12,0.18,72,0.20
+Don't Stop Believin',Journey,rock,0.72,0.70,119,0.50
+Uptown Funk,Bruno Mars,funk,0.92,0.85,115,0.90
+Happy,Pharrell Williams,pop,0.95,0.80,160,0.85
+Weightless Pt2,Various,ambient,0.30,0.10,55,0.15
+Circles,Post Malone,pop,0.50,0.50,120,0.65
+Someone You Loved,Lewis Capaldi,pop,0.10,0.28,110,0.30
+Bohemian Rhapsody,Queen,rock,0.55,0.60,72,0.35
+Sweet Dreams,Eurythmics,synthpop,0.45,0.65,124,0.70
+Riptide,Vance Joy,indie,0.70,0.50,102,0.55
+Ho Hey,The Lumineers,folk,0.68,0.45,74,0.45
+Take Me to Church,Hozier,alternative,0.35,0.55,129,0.45
+Chandelier,Sia,pop,0.45,0.75,116,0.60
+Yesterday,The Beatles,rock,0.20,0.15,97,0.20
+Let It Go,Idina Menzel,soundtrack,0.30,0.55,140,0.35
+Titanium,David Guetta,edm,0.55,0.85,126,0.75
+Firework,Katy Perry,pop,0.80,0.78,124,0.70
+Radioactive,Imagine Dragons,rock,0.45,0.82,136,0.55
+Africa,Toto,rock,0.75,0.60,93,0.65
+Feeling Good,Nina Simone,jazz,0.60,0.45,116,0.40
+Ain't No Sunshine,Bill Withers,soul,0.25,0.35,77,0.35
+September,Earth Wind and Fire,funk,0.90,0.80,126,0.90
+Lose Yourself,Eminem,hip-hop,0.35,0.85,86,0.55
+In the End,Linkin Park,rock,0.30,0.75,105,0.45
+Rolling in the Deep,Adele,pop,0.40,0.65,105,0.55
+Viva la Vida,Coldplay,rock,0.65,0.68,138,0.50
+Dog Days Are Over,Florence and the Machine,indie,0.65,0.72,149,0.60
+Evidências,Chitãozinho & Xororó,sertanejo,0.20,0.32,68,0.30
+Erro Gostoso,Israel & Rodolffo,sertanejo,0.18,0.38,90,0.45
+Bloqueado,Zé Neto & Cristiano,sertanejo,0.22,0.40,95,0.42
+Coração Cachorro,Gusttavo Lima,sertanejo,0.25,0.42,92,0.48
+Rindo à Toa,Marília Mendonça,sertanejo,0.20,0.35,80,0.40
+Você Faz Falta Aqui,Henrique & Juliano,sertanejo,0.18,0.30,75,0.35
+Ai Se Eu Te Pego,Michel Teló,sertanejo,0.82,0.80,130,0.85
+Livre pra Voar,Jorge & Mateus,sertanejo,0.78,0.75,125,0.78
+Batida Diferente,Luan Santana,sertanejo,0.75,0.72,120,0.75
+Cheia de Manias,Raça Negra,pagode,0.68,0.38,84,0.55
+Trevo (Tu),Sorriso Maroto,pagode,0.72,0.55,98,0.68
+Deixa Acontecer,Thiaguinho,pagode,0.80,0.70,115,0.78
+Ela É do Tipo,MC Livinho,funk,0.78,0.82,130,0.90
+Cheguei,Ludmilla,funk,0.85,0.85,135,0.92
+Água na Boca,Anitta,funk,0.82,0.80,128,0.88
+Esperando na Janela,Falamansa,forro,0.70,0.60,110,0.65
+Anunciação,Alceu Valença,forro,0.62,0.40,95,0.50
+Águas de Março,Elis Regina,mpb,0.55,0.20,72,0.30
+Wave,Tom Jobim,bossa-nova,0.58,0.15,70,0.28
+Que País É Esse,Legião Urbana,rock-nacional,0.30,0.85,145,0.45
+Selvagem,CPM 22,rock-nacional,0.35,0.88,150,0.50
+Índios,Legião Urbana,rock-nacional,0.45,0.55,110,0.35
+Metade,Fresno,rock-nacional,0.25,0.75,135,0.40
+Você Não Vale Nada,Zé Neto & Cristiano,sertanejo,0.20,0.35,88,0.42
+Rebola,Zé Felipe,sertanejo,0.22,0.40,90,0.45
+50 Reais,Naiara Azevedo,sertanejo,0.18,0.28,72,0.32
+Medo Bobo,Marília Mendonça,sertanejo,0.22,0.33,85,0.40
+Infiel,Marília Mendonça,sertanejo,0.20,0.38,92,0.45
+Você Faz Falta,Mano Walter,sertanejo,0.20,0.30,80,0.36
+Cara de Sono,Israel & Rodolffo,sertanejo,0.75,0.68,118,0.72
+Batidão Rancheiro,Israel & Rodolffo,sertanejo,0.78,0.75,124,0.78
+Cheia de Manias 2,Gusttavo Lima,sertanejo,0.72,0.55,95,0.60
+Balada Boa,Gusttavo Lima,sertanejo,0.80,0.78,128,0.82
+Fico Assim Sem Você,Claudinho & Buchecha,pagode,0.78,0.72,120,0.80
+Anna Julia,Los Hermanos,rock-nacional,0.55,0.35,90,0.30
+Pais e Filhos,Legião Urbana,rock-nacional,0.35,0.45,105,0.30
+Tempo Perdido,Legião Urbana,rock-nacional,0.50,0.55,120,0.35
+Alagados,Tim Maia / Herbert Vianna,rock-nacional,0.65,0.60,115,0.55
+É o Amor,Zeca Pagodinho,pagode,0.75,0.45,90,0.65
+Deixa a Vida Me Levar,Zeca Pagodinho,pagode,0.80,0.55,100,0.72
+Camarão que Dorme a Onda Leva,Exaltasamba,pagode,0.70,0.50,95,0.68
+Não Dá pra Explicar,Molejo,pagode,0.72,0.60,105,0.75
+Corazón,Maiara & Maraisa,sertanejo,0.25,0.30,78,0.35
+Você Faz Falta Aqui 2,Maiara & Maraisa,sertanejo,0.18,0.32,80,0.38
+Pesadão,Simone Mendes,sertanejo,0.65,0.62,110,0.68
+Encaixa,Simone Mendes,sertanejo,0.70,0.65,115,0.70
+Domingo,Marília Mendonça,sertanejo,0.75,0.70,118,0.75
+Todo Mundo Vai Sofrer,Marília Mendonça,sertanejo,0.60,0.65,112,0.70
+Flores,Marisa Monte,mpb,0.55,0.20,68,0.25
+Ando Meio Desligado,Los Hermanos,rock-nacional,0.60,0.45,100,0.40
+Comida,Titãs,rock-nacional,0.55,0.75,140,0.45
+Epitáfio,Titãs,rock-nacional,0.45,0.50,95,0.30
+Garota de Ipanema,Tom Jobim,bossa-nova,0.65,0.20,75,0.35
+Chega de Saudade,João Gilberto,bossa-nova,0.55,0.18,70,0.30
+Mas Que Nada,Jorge Ben Jor,mpb,0.85,0.65,110,0.80
+Aquarela,Toquinho,mpb,0.70,0.30,80,0.35
+Como Nossos Pais,Elis Regina,mpb,0.35,0.30,85,0.30
+O Mar Serenou,Ivan Lins,mpb,0.60,0.25,72,0.30
+Trem-Bala,Ana Vilela,mpb,0.62,0.28,78,0.25
+Domingo de Manhã,Nando Reis,mpb,0.68,0.30,82,0.30
+Girassol,Vanessa da Mata,mpb,0.75,0.42,95,0.55
+Amor I Love You,Marisa Monte,mpb,0.72,0.35,88,0.45
+Sina,Djavan,mpb,0.70,0.40,92,0.55
+Se Eu Não Te Amasse Tanto Assim,Roberto Carlos,romantica,0.62,0.30,75,0.30
+Amada Amante,Roberto Carlos,romantica,0.70,0.38,80,0.40
+Como É Grande o Meu Amor Por Você,Roberto Carlos,romantica,0.68,0.32,72,0.30
+Evidências (Ao Vivo),Chitãozinho & Xororó,sertanejo,0.20,0.35,68,0.32
+Segue o Jogo,Wesley Safadão,sertanejo,0.82,0.85,132,0.88
+Coração de Papel,Wesley Safadão,sertanejo,0.78,0.78,125,0.82
+Camarote,Wesley Safadão,forro,0.80,0.80,128,0.85
+Vidro Fumê,Ferrugem,pagode,0.72,0.50,95,0.65
+Meu Xodó,Ferrugem,pagode,0.75,0.55,100,0.70
+Menina Solta,Ferrugem,pagode,0.78,0.58,105,0.72
+Bem Querer,Alcione,samba,0.68,0.42,88,0.60
+Você Vai Ver,Chico Buarque,mpb,0.35,0.35,90,0.30
+Construção,Chico Buarque,mpb,0.20,0.40,100,0.25
+Apesar de Você,Chico Buarque,mpb,0.40,0.45,95,0.30
+Preta Pretinha,Novos Baianos,mpb,0.80,0.55,105,0.65
+Reggae Rasta,Natiruts,reggae-nacional,0.65,0.45,90,0.55
+Andança,Alceu Valença,forro,0.55,0.35,80,0.40
+Sanfona,Falamansa,forro,0.68,0.55,100,0.62
+Xote das Meninas,Luiz Gonzaga,forro,0.60,0.40,85,0.50
+Asa Branca,Luiz Gonzaga,forro,0.40,0.35,88,0.35
+Numanice,Alcione,samba,0.72,0.48,90,0.62
+Cai Cai Balão,Roupa Nova,rock-nacional,0.65,0.40,85,0.40
+Whisky a Go Go,Roupa Nova,rock-nacional,0.70,0.48,92,0.55

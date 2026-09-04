@@ -1,0 +1,25 @@
+# Segredos - NUNCA commitar
+.env
+*.env
+!.env.example
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
+*.log
+
+# Artefatos
+*.zip
